@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Deployment Status Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f7f7;
+            padding: 40px;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        h1 { text-align: center; }
+        .item {
+            margin: 12px 0;
+            padding: 10px;
+            background: #fafafa;
+        }
+        .label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Latest Deployment</h1>
+
+        <div class="item">
+            <span class="label">Status:</span>
+            <span id="status"></span>
+        </div>
+
+        <div class="item">
+            <span class="label">Commit:</span>
+            <span id="commit"></span>
+        </div>
+
+        <div class="item">
+            <span class="label">Branch:</span>
+            <span id="branch"></span>
+        </div>
+
+        <div class="item">
+            <span class="label">Triggered by:</span>
+            <span id="triggered_by"></span>
+        </div>
+
+        <div class="item">
+            <span class="label">Repository:</span>
+            <span id="repository"></span>
+        </div>
+
+        <div class="item">
+            <span class="label">Run ID:</span>
+            <span id="run_id"></span>
+        </div>
+
+        <div class="item">
+            <span class="label">Timestamp:</span>
+            <span id="timestamp"></span>
+        </div>
+    </div>
+
+    <script>
+        fetch('status.json')
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById('status').textContent = data.status;
+            document.getElementById('commit').textContent = data.commit;
+            document.getElementById('branch').textContent = data.branch;
+            document.getElementById('triggered_by').textContent = data.triggered_by;
+            document.getElementById('repository').textContent = data.repository;
+            document.getElementById('run_id').textContent = data.run_id;
+            document.getElementById('timestamp').textContent = data.timestamp;
+        });
+    </script>
+</body>
+</html>
